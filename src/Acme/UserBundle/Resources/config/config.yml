@@ -31,5 +31,9 @@ parameters:
       UserTwo:
         entity: Acme\UserBundle\Entity\UserTwo
         registration: Acme\UserBundle\Form\Type\RegistrationUserTwoFormType
+        registration_options: 
+          validation_groups: [Registration, Default]
         profile: Acme\UserBundle\Form\Type\ProfileUserTwoFormType
+        profile_options: 
+          validation_groups: [Profile, Default]
         factory: 

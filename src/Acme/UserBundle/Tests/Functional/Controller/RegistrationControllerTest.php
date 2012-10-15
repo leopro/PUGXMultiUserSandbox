@@ -129,6 +129,49 @@ class RegistrationControllerTest extends WebTestCase
         $this->assertEquals('Acme\UserBundle\Entity\\' . $entity, $session->get(UserDiscriminator::SESSION_NAME)); 
     }
     
+    public function uniqueValidationProvider()
+    {
+        return array(
+            array(
+              "/register/user-one",
+              "userone",
+              "userone",              
+              "newuserone@netmeans.net"
+            ),
+            array(
+              "/register/user-two",
+              "userone",
+              "userone",
+              "newuserone@netmeans.net"
+            )
+        );
+    }
+    
+    /**
+     * @dataProvider uniqueValidationProvider
+     */
+    public function testUniqueValidation($path, $username, $password, $email)
+    {
+        $client = static::createClient();
+        $client->followRedirects(true);
+                
+        $crawler = $client->request('GET', $path);
+        
+        $form = $crawler->selectButton('Register')->form();
+        
+        $crawler = $client->submit(
+            $form,
+            array(
+                'fos_user_registration_form[username]'                  => $username,
+                'fos_user_registration_form[email]'                     => $email,
+                'fos_user_registration_form[plainPassword][first]'      => $password,
+                'fos_user_registration_form[plainPassword][second]'     => $password,
+            )
+        );
+        
+        $this->assertRegExp("/The username is already used/", $crawler->filter("ul li")->eq(0)->text());
+    }
+    
     public function tearDown()
     {
         $userOne = $this->em->getRepository('AcmeUserBundle:UserOne')->findOneByEmail('useronenotconfirmed@netmeans.net');        
@@ -153,4 +196,6 @@ class RegistrationControllerTest extends WebTestCase
         
         $this->em->flush();
     }
+    
+    
 }
