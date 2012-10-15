@@ -3,7 +3,7 @@
 namespace Acme\UserBundle\Tests\Functional\Controller;
 
 use Symfony\Component\HttpFoundation\File\UploadedFile;
-use PUGX\MultiUserBundle\Model\UserDiscriminator;
+use PUGX\MultiUserBundle\Manager\UserDiscriminator;
 
 /**
  * 

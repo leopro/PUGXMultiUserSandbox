@@ -1,5 +1,5 @@
 {
-    "hash": "86a7e90e20bbe24088084af609b8769f",
+    "hash": "21dff497a7d5b4068f886e2a8d4737ff",
     "packages": [
         {
             "name": "doctrine/common",
@@ -809,24 +809,24 @@
         },
         {
             "name": "pugx/multi-user-bundle",
-            "version": "1.4.x-dev",
+            "version": "1.3.x-dev",
             "target-dir": "PUGX/MultiUserBundle",
             "source": {
                 "type": "git",
                 "url": "https://github.com/PUGX/PUGXMultiUserBundle",
-                "reference": "c99e36aced4245df61e858e0f062680e244c4b94"
+                "reference": "d69dabc3a46825b91bea174ea9454cff498a6d19"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/PUGX/PUGXMultiUserBundle/zipball/c99e36aced4245df61e858e0f062680e244c4b94",
-                "reference": "c99e36aced4245df61e858e0f062680e244c4b94",
+                "url": "https://github.com/PUGX/PUGXMultiUserBundle/zipball/d69dabc3a46825b91bea174ea9454cff498a6d19",
+                "reference": "d69dabc3a46825b91bea174ea9454cff498a6d19",
                 "shasum": ""
             },
             "require": {
                 "friendsofsymfony/user-bundle": "1.3.*",
                 "symfony/form": "2.1.*"
             },
-            "time": "1350322405",
+            "time": "1350326806",
             "type": "symfony-bundle",
             "installation-source": "source",
             "autoload": {

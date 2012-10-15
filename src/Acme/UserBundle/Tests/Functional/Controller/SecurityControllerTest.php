@@ -5,7 +5,7 @@
 
 namespace Acme\UserBundle\Tests\Functional\Controller;
 
-use PUGX\MultiUserBundle\Model\UserDiscriminator;
+use PUGX\MultiUserBundle\Manager\UserDiscriminator;
 
 /**
  * 

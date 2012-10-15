@@ -20,7 +20,7 @@
         "jms/di-extra-bundle": "1.1.*",
         "friendsofsymfony/user-bundle": "v1.3.0",
         "doctrine/doctrine-fixtures-bundle": "dev-master",
-        "pugx/multi-user-bundle": "1.4.x-dev"
+        "pugx/multi-user-bundle": "1.3.x-dev"
     },
     "scripts": {
         "post-install-cmd": [
