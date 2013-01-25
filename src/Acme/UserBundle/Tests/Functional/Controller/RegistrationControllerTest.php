@@ -33,7 +33,7 @@ class RegistrationControllerTest extends WebTestCase
               "usertwo",
               "newusertwo@netmeans.net",
               "UserTwo",
-            )
+            ),
         );
     } 
     
@@ -42,7 +42,7 @@ class RegistrationControllerTest extends WebTestCase
      */
     public function testRegistration($path, $username, $password, $email, $entity)
     {
-        $client     = static::createClient();
+        $client = static::createClient();
         $client->followRedirects(true);
                 
         $crawler = $client->request('GET', $path);
@@ -70,6 +70,16 @@ class RegistrationControllerTest extends WebTestCase
         $user = $this->em->getRepository('AcmeUserBundle:'.$entity)->findOneByEmail($email);          
         $this->assertEquals($username, $user->getUsername());
         $this->assertEquals('Acme\UserBundle\Entity\\' . $entity, get_class($user));
+    }
+    
+    
+    public function testRegistrationException()
+    {
+        $client = static::createClient();
+        $client->followRedirects(true);
+                
+        $crawler = $client->request('GET', "/register/user-three");
+        $this->assertEquals(500, $client->getResponse()->getStatusCode()); 
     }
     
     public function userConfirmProvider()

@@ -9,6 +9,7 @@ use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 
 use Acme\UserBundle\Entity\UserOne;
 use Acme\UserBundle\Entity\UserTwo;
+use Acme\UserBundle\Entity\UserThree;
 
 /**
  * Loads the user fixtures
@@ -41,6 +42,14 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface, C
         $userTwo->setEmail('usertwo@netmeans.net');
         $userTwo->setEnabled(true);        
         $manager->persist($userTwo);  
+        
+        $userThree = new UserThree();
+        $userThree->setUsername('userthree');
+        $encoder = $this->container->get('security.encoder_factory')->getEncoder($userThree);
+        $userThree->setPassword($encoder->encodePassword('userthree', $userThree->getSalt()));
+        $userThree->setEmail('userthree@netmeans.net');
+        $userThree->setEnabled(true);        
+        $manager->persist($userThree);
         
         $userOneNotConfirmed = new UserOne();
         $userOneNotConfirmed->setUsername('userone-not-confirmed');

@@ -32,6 +32,11 @@ class SecurityControllerTest extends WebTestCase
               "usertwo",
               "usertwo",
               "UserTwo",
+            ),
+            array(
+              "userthree",
+              "userthree",
+              "UserThree",
             )
         );
     } 

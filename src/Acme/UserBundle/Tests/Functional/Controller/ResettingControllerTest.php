@@ -1,8 +1,5 @@
 <?php
 
-//phpunit -c app/ --filter=ResettingController
-//$client->getResponse()->getContent();
-
 namespace Acme\UserBundle\Tests\Functional\Controller;
 
 /**
@@ -27,6 +24,10 @@ class ResettingControllerTest extends WebTestCase
             array(
               "usertwo@netmeans.net",
               "usertwo",
+            ),
+            array(
+              "userthree@netmeans.net",
+              "userthree",
             )
         );
     } 
@@ -79,12 +80,13 @@ class ResettingControllerTest extends WebTestCase
     public function tearDown()
     {
         $userOne = $this->em->getRepository('AcmeUserBundle:UserOne')->findOneByUsername('userone');
-//        $userOne->setPlainPassword('userone');
         $userOne->setPasswordRequestedAt(null);
 
         $userTwo = $this->em->getRepository('AcmeUserBundle:UserTwo')->findOneByUsername('usertwo');
-//        $userTwo->setPlainPassword('usertwo');
         $userTwo->setPasswordRequestedAt(null);
+        
+        $userThree = $this->em->getRepository('AcmeUserBundle:UserThree')->findOneByUsername('userthree');
+        $userThree->setPasswordRequestedAt(null);
         
         $this->em->flush();
     }

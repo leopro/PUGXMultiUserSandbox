@@ -61,12 +61,22 @@ class ProfileControllerTest extends WebTestCase
                 'fos_user_profile_form[current_password]'         => $password,
             )
         );
-        
+                
         $this->assertTrue($client->getResponse()->isSuccessful());
         
         $user = $this->em->getRepository('AcmeUserBundle:'.$entity)->findOneByEmail($newEmail);        
         $this->assertEquals($username, $user->getUsername());
         $this->assertEquals('Acme\UserBundle\Entity\\' . $entity, get_class($user));
+    }
+    
+    public function testProfileException()
+    {
+        $client = static::createClient();
+        $client->followRedirects(true);
+        $client  = $this->login($client, 'userthree', 'userthree');
+        $crawler = $client->request('GET', '/profile/edit');
+        
+        $this->assertEquals(500, $client->getResponse()->getStatusCode()); 
     }
     
     /**

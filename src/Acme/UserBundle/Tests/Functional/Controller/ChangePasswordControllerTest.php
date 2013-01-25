@@ -29,6 +29,11 @@ class ChangePasswordControllerTest extends WebTestCase
               "usertwo",
               "usertwo",
               "UserTwo",
+            ),
+            array(
+              "userthree",
+              "userthree",
+              "UserThree",
             )
         );
     } 
@@ -47,8 +52,6 @@ class ChangePasswordControllerTest extends WebTestCase
                 
         $button = $crawler->selectButton('Change password');
         $form = $button->form();
-        
-//        $this->output($client);
         
         $crawler = $client->submit(
             $form,
@@ -75,7 +78,5 @@ class ChangePasswordControllerTest extends WebTestCase
                 'fos_user_change_password_form[plainPassword][second]' => $password,
             )
         );
-        
-        
-    }    
+    }   
 }
