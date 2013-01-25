@@ -43,17 +43,19 @@ class ChangePasswordControllerTest extends WebTestCase
         $client->followRedirects(true);
         
         $client = $this->login($client, $username, $password);
-        $crawler    = $client->request('GET', '/profile/change-password');
+        $crawler = $client->request('GET', '/profile/change-password');
                 
         $button = $crawler->selectButton('Change password');
         $form = $button->form();
+        
+//        $this->output($client);
         
         $crawler = $client->submit(
             $form,
             array(
                 'fos_user_change_password_form[current_password]' => $password,
-                'fos_user_change_password_form[new][first]' => $password . '_new',
-                'fos_user_change_password_form[new][second]' => $password . '_new',
+                'fos_user_change_password_form[plainPassword][first]' => $password . '_new',
+                'fos_user_change_password_form[plainPassword][second]' => $password . '_new',
             )
         );
         
@@ -69,8 +71,8 @@ class ChangePasswordControllerTest extends WebTestCase
             $form,
             array(
                 'fos_user_change_password_form[current_password]' => $password . '_new',
-                'fos_user_change_password_form[new][first]' => $password,
-                'fos_user_change_password_form[new][second]' => $password,
+                'fos_user_change_password_form[plainPassword][first]' => $password,
+                'fos_user_change_password_form[plainPassword][second]' => $password,
             )
         );
         

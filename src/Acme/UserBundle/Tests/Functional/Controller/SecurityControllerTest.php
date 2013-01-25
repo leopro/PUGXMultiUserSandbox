@@ -76,5 +76,4 @@ class SecurityControllerTest extends WebTestCase
         $session = $client->getContainer()->get("session");
         $this->assertEquals('Acme\UserBundle\Entity\\' . $entity, $session->get(UserDiscriminator::SESSION_NAME)); 
     }
-
 }

@@ -41,6 +41,7 @@ abstract class WebTestCase extends SymfonyWebTestCase
                 '_password' => $password,
             )
         );
+        
         return $client;
     }
     
@@ -94,6 +95,10 @@ abstract class WebTestCase extends SymfonyWebTestCase
         $this->assertTrue($crawler->filter('input#password')->count() > 0);
         $this->assertTrue($crawler->filter('input#_submit')->count() > 0);
     }
-        
+     
+    protected function output($client)
+    {
+        echo $client->getResponse()->getContent();
+    }
 }
 

@@ -63,12 +63,12 @@ class ResettingControllerTest extends WebTestCase
 
         $this->assertTrue($client->getResponse()->isSuccessful());
         $form = $crawler->selectButton('Change password')->form();
-
+        
         $crawler = $client->submit(
             $form,
             array(
-                'fos_user_resetting_form[new][first]' => $password,
-                'fos_user_resetting_form[new][second]' => $password,
+                'fos_user_resetting_form[plainPassword][first]' => $password,
+                'fos_user_resetting_form[plainPassword][second]' => $password,
             )
         );
         

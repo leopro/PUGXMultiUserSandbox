@@ -26,12 +26,14 @@ class ProfileControllerTest extends WebTestCase
               "userone",
               "userone@netmeans.net",
               "UserOne",
+              "userone_new@netmeans.net",
             ),
             array(
               "usertwo",
               "usertwo",
               "usertwo@netmeans.net",
               "UserTwo",
+              "usertwo_new@netmeans.net",
             )
         );
     } 
@@ -39,7 +41,7 @@ class ProfileControllerTest extends WebTestCase
     /**
      * @dataProvider userProvider
      */
-    public function testProfile($username, $password, $email, $entity)
+    public function testProfile($username, $password, $email, $entity, $newEmail)
     {
         $this->isSecure('/profile/edit');  
         
@@ -55,14 +57,14 @@ class ProfileControllerTest extends WebTestCase
             $form,
             array(
                 'fos_user_profile_form[username]'  => $username,
-                'fos_user_profile_form[email]'     => $email,
+                'fos_user_profile_form[email]'     => $newEmail,
                 'fos_user_profile_form[current_password]'         => $password,
             )
         );
         
         $this->assertTrue($client->getResponse()->isSuccessful());
         
-        $user = $this->em->getRepository('AcmeUserBundle:'.$entity)->findOneByEmail($email);        
+        $user = $this->em->getRepository('AcmeUserBundle:'.$entity)->findOneByEmail($newEmail);        
         $this->assertEquals($username, $user->getUsername());
         $this->assertEquals('Acme\UserBundle\Entity\\' . $entity, get_class($user));
     }
@@ -93,4 +95,20 @@ class ProfileControllerTest extends WebTestCase
         $this->assertRegExp("/This value should be the user current password/", $crawler->filter("ul li")->eq(2)->text());
     }
     
+    public function tearDown()
+    {
+        $userOne = $this->em->getRepository('AcmeUserBundle:UserOne')->findOneByEmail('userone_new@netmeans.net');    
+        if ($userOne) {
+            $userOne->setEmail('userone@netmeans.net');
+            $this->em->persist($userOne);
+        }
+        
+        $userTwo = $this->em->getRepository('AcmeUserBundle:UserTwo')->findOneByEmail('usertwo_new@netmeans.net');     
+        if ($userTwo) {
+            $userTwo->setEmail('usertwo@netmeans.net');
+            $this->em->persist($userTwo);
+        }
+        
+        $this->em->flush();
+    }
 }

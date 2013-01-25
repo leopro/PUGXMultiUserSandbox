@@ -37,22 +37,6 @@ class RegistrationControllerTest extends WebTestCase
         );
     } 
     
-    public function userConfirmProvider()
-    {
-        return array(
-            array(           
-              "useronenotconfirmed@netmeans.net",
-              "UserOne",
-              "abcdefg"
-            ),
-            array(
-              "usertwonotconfirmed@netmeans.net",
-              "UserTwo",
-              "pkdddfff"
-            )
-        );
-    } 
-    
     /**
      * @dataProvider userRegistrationProvider
      */
@@ -88,6 +72,22 @@ class RegistrationControllerTest extends WebTestCase
         $this->assertEquals('Acme\UserBundle\Entity\\' . $entity, get_class($user));
     }
     
+    public function userConfirmProvider()
+    {
+        return array(
+            array(           
+              "useronenotconfirmed@netmeans.net",
+              "UserOne",
+              "abcdefg"
+            ),
+            array(
+              "usertwonotconfirmed@netmeans.net",
+              "UserTwo",
+              "pkdddfff"
+            )
+        );
+    } 
+    
     /**
      * @dataProvider userRegistrationProvider
      */
@@ -95,7 +95,7 @@ class RegistrationControllerTest extends WebTestCase
     {
         $client     = static::createClient();
         $client->followRedirects(true);
-                
+        
         $crawler    = $client->request('GET', $path);
         
         $form = $crawler->selectButton('Register')->form();
@@ -109,7 +109,7 @@ class RegistrationControllerTest extends WebTestCase
                 'fos_user_registration_form[plainPassword][second]'     => "",
             )
         );
-        
+                
         $this->assertRegExp("/Please enter a username/", $crawler->filter("ul li")->eq(0)->text());
     }
     
